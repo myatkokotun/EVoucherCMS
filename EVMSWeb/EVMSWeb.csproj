@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\vendor\pwstrength-bootstrap\.vscode\settings.json" />
+    <Content Include="wwwroot\vendor\quill\node_modules\eventemitter3\package.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\vendor\fancybox\.github\ISSUE_TEMPLATE\bug_report.md" />
+    <None Include="wwwroot\vendor\fancybox\.github\ISSUE_TEMPLATE\feature_request.md" />
+    <None Include="wwwroot\vendor\fancybox\.github\ISSUE_TEMPLATE\question.md" />
+    <None Include="wwwroot\vendor\quill\node_modules\eventemitter3\index.js" />
+    <None Include="wwwroot\vendor\quill\node_modules\eventemitter3\LICENSE" />
+    <None Include="wwwroot\vendor\quill\node_modules\eventemitter3\README.md" />
+    <None Include="wwwroot\vendor\quill\node_modules\eventemitter3\umd\eventemitter3.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.9.4">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+    <PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\vendor\quill\node_modules\eventemitter3\index.d.ts" />
+  </ItemGroup>
+
+</Project>

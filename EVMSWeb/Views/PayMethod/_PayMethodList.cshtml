@@ -1,0 +1,30 @@
+﻿@model List<EVMSWeb.Models.TbPaymentMethod>
+@if (Model.Count != 0)
+{
+    <div class="row" style="min-width:920px">
+        @foreach (var pm in Model)
+        {
+            <div class="col-sm-6 col-md-4 mb-5">
+                <!-- Card -->
+                <div class="card card-frame h-100" href="app-description.html">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="d-block text-dark font-weight-bold">@pm.MethodName</span>
+                            <img class="ml-2" src="~/svg/illustrations/top-vendor.svg" alt="Image Description" title="Top Vendor" width="16">
+                        </div>
+                        <span class="d-block text-body font-size-1">Promotion : @pm.Discount %</span>
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row align-items-center">
+                            <button onclick="EditPayMethod(this)" data-id="@pm.Id" class="btn btn-xs font-weight-bold btn-primary mr-2" style="width:90px;">Edit</button>
+                            <button onclick="DeletePayMethod(this)" data-id="@pm.Id" class="btn btn-xs font-weight-bold btn-primary mr-2" style="width:90px;">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Card -->
+            </div>
+        }
+        <div class="clearfix"></div>
+    </div>
+}

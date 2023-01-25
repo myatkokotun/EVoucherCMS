@@ -1,0 +1,154 @@
+﻿@{
+    ViewData["Title"] = "Payment";
+}
+
+<div class="row align-items-center mb-5">   
+    <div class="pull-right">
+        <div class="row align-items-center" style="padding-left:15px;">
+            <button onclick="AddNewPayMethod()" class="btn btn-xs font-weight-bold btn-primary mr-2">Add New Pay Method&nbsp;&nbsp;<i class="flaticon2-plus icon-md"></i></button>
+        </div>
+    </div>
+</div>
+
+<div class="pmlist_result"></div>
+
+<div class="modal fade" id="PMFormModal" tabindex="-1" role="dialog" aria-labelledby="PMFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="PMFormModalLabel">Add New Payment Method</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <i aria-hidden="true" class="ki ki-close"></i>
+                </button>
+            </div>
+            <div class="modal-body" id="pmform">
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/assets/js/scripts.bundle.js"></script>
+    <script type="text/javascript">
+        var id = 0;
+        $(function () {
+            getPayMethodList();
+        });
+
+        function getPayMethodList() {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("_PayMethodList", "PayMethod")',
+                data: {
+                },
+                beforeSend: function () {
+                    $('.pmlist_result').empty().append('<div class="lds-ellipsis" style="margin-left: 500px;"><div></div><div></div><div></div></div>');
+                },
+                success: function (myData) {
+                    $('.pmlist_result').empty().append(myData);
+                },
+                complete: function () {
+                }
+            });
+        }
+
+        function AddNewPayMethod() {
+            getPayMethodForm("Add", 0)
+        }
+
+        function EditPayMethod(e) {
+            var id = $(e).attr('data-id');
+            getPayMethodForm("Edit", id)
+        }
+
+        function getPayMethodForm(formtype, ID) {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("_PayMethodForm", "PayMethod")',
+                data: { formtype: formtype, ID: ID },
+                beforeSend: function () {
+
+                },
+                success: function (myData) {
+                    $('#pmform').empty().append(myData);
+                },
+                complete: function () {
+                    $('#PMFormModal').modal('show');
+                    $("#PayMethodForm").submit(function (e) {
+                        e.preventDefault();
+                        $.ajax({
+                            cache: false,
+                            type: "POST",
+                            url: '@Url.Action("UpSertPayMethod", "PayMethod")',
+                            data: $(this).serialize(),
+                            beforeSend: function () {
+                                $('#btnsave').empty().append('Saving...');
+                                $('#btnsave').prop("disabled", true);
+                            },
+                            success: function (myData) {
+                                if (myData != null) {
+                                    Swal.fire({
+                                        icon: 'success',
+                                        title: 'Thank You',
+                                        text: 'Your operation was successful',
+                                    })
+                                } else {
+                                    Swal.fire({
+                                        icon: 'error',
+                                        title: 'Sorry',
+                                        text: 'Please Try Again',
+                                    })
+                                }
+                            },
+                            complete: function () {
+                                $('#btnsave').empty().append('<span class="flaticon2-checkmark icon-md">&nbsp;&nbsp;</span> Save');
+                                $('#btnsave').prop("disabled", false);
+                                $('#PMFormModal').modal('hide');
+                                getPayMethodList();
+                            }
+                        });
+                    });
+                }
+            });
+        }
+
+        function DeletePayMethod(e) {
+            id = $(e).attr('data-id');
+            Swal.fire({
+                icon: 'warning',
+                title: 'Are you sure to Delete?',
+                showCancelButton: true,
+                confirmButtonColor: '#3699FF',
+                cancelButtonColor: '#F64E60',
+                confirmButtonText: 'Yes'
+            }).then((result) => {
+                if (result.value) {
+                    DeleteConfim();
+                    Swal.fire({
+                        icon: 'success',
+                        confirmButtonColor: '#1BC5BD',
+                        title: 'Thank You',
+                        text: 'Your operation was successful',
+                    })
+                }
+            });
+        }
+
+        function DeleteConfim(e) {
+            $.ajax({
+                cache: false,
+                url: '@Url.Action("DeletePayMethod", "PayMethod")',
+                data: { ID: id },
+                beforeSend: function () {
+                },
+                success: function (myData) {
+                    if (myData != null) {
+                        getPayMethodList();
+                    }
+                },
+                complete: function () {
+                }
+            });
+        }
+    </script>
+}

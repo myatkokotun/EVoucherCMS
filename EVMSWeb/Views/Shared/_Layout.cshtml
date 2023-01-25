@@ -1,0 +1,222 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Title -->
+    <title>App Marketplace | Front - Responsive Website Template</title>
+
+    <!-- Required Meta Tags Always Come First -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../../favicon.ico">
+
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600&display=swap" rel="stylesheet">
+
+    <!-- CSS Implementing Plugins -->
+    <link rel="stylesheet" href="~/vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" href="~/vendor/hs-mega-menu/dist/hs-mega-menu.min.css">
+
+    <!-- CSS Front Template -->
+    <link rel="stylesheet" href="~/css/theme.css">
+    <link href="~/css/custom.css" rel="stylesheet" />
+</head>
+<body>
+    <!-- ========== HEADER ========== -->
+    <header id="header" class="header">
+        <div class="header-section mb-5" style="background-color:#94b8f2 !important">
+            <div id="logoAndNav" class="container">
+                <!-- Nav -->
+                <nav class="js-mega-menu navbar navbar-expand-lg">
+                    <!-- Logo -->
+                    <a class="navbar-brand" href="~/Home/index.html" aria-label="Front">
+                        @*<img src="~/svg/logos/logo.svg" alt="Logo">*@
+                        <img src="~/image/shoppinglogo.png" style="width:50%" />
+                    </a>
+                    <!-- End Logo -->
+                    <!-- Navigation -->
+                    <div id="navBar" class="collapse navbar-collapse">
+                        <ul class="navbar-nav">
+                            <!-- Home -->
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <li class="hs-has-mega-menu navbar-nav-item">
+                                    <div class="btn btn-icon btn-icon-mobile w-auto btn-clean d-flex align-items-center btn-lg px-2" id="kt_quick_user_toggle">
+                                        <span class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3">@User.FindFirst("urn:Custom:Username").Value</span>
+                                    </div>
+                                </li>
+                                <li class="hs-has-mega-menu navbar-nav-item">
+                                    <a asp-controller="Login" asp-action="Logout" class="menu-link">
+                                        <i class="menu-icon flaticon-logout"></i>
+                                        <span class="menu-text">Logout</span>
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <!-- End Navigation -->
+                </nav>
+                <!-- End Nav -->
+            </div>
+        </div>
+    </header>
+    <!-- ========== END HEADER ========== -->
+    <!-- ========== MAIN CONTENT ========== -->
+    <main id="content" role="main">
+        <!-- Apps Section -->
+        <div class="container space-bottom-2 space-bottom-lg-3">
+            <div class="row">
+                <div class="col-lg-2 mb-5 mb-lg-0">
+                    <div class="mr-lg-3">
+                        <!-- Navbar -->
+                        <div class="navbar-expand-lg navbar-expand-lg-collapse-block navbar-light">
+                            <div id="sidebarNav" class="collapse navbar-collapse">
+                                <div class="p-2 p-lg-0">
+                                    <div class="mt-3 mt-lg-0">
+                                        <a href="@Url.Action("Index","Home")" class="dropdown-item d-flex justify-content-between align-items-center px-0">
+                                            EVoucher
+                                        </a>
+                                        <a href="@Url.Action("Index","PayMethod")" class="dropdown-item d-flex justify-content-between align-items-center px-0">
+                                            Payment Method
+                                        </a>
+                                        @*<a href="@Url.Action("Index","CMSUser")" class="dropdown-item d-flex justify-content-between align-items-center px-0">
+                                            CMS User
+                                        </a>*@
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End Navbar -->
+                    </div>
+                </div>
+
+                <div class="col-lg-9 column-divider-lg">
+                    <div class="ml-lg-2">
+                        <div class="row mx-n2 mb-7">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Apps Section -->
+    </main>
+    <!-- ========== END MAIN CONTENT ========== -->
+    <!-- ========== FOOTER ========== -->
+    <footer class="bg-light">
+        <!-- Lists -->
+        <div class="container">
+            <div class="border-top space-2">
+                <div class="row justify-content-md-between">
+                    <div class="col-lg-4 mb-4 mb-lg-0">
+                        <a class="d-inline-flex mb-4" href="index.html" aria-label="Front">
+                            <img class="brand" src="~/svg/logos/logo.svg" alt="Logo">
+                        </a>
+                        <p>We are driven to deliver results for all your businesses.</p>
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-lg-2 mb-4 mb-lg-0">
+                        <h5>About</h5>
+
+                        <!-- Nav Link -->
+                        <ul class="nav nav-sm nav-x-0 flex-column">
+                            <li class="nav-item"><a class="nav-link" href="../pages/about-agency.html">About</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../pages/services-agency.html">Services</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../pages/careers.html">Careers</a></li>
+                        </ul>
+                        <!-- End Nav Link -->
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-lg-2 mb-4 mb-lg-0">
+                        <h5>Account</h5>
+
+                        <!-- Nav Link -->
+                        <ul class="nav nav-sm nav-x-0 flex-column">
+                            <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">My tasks</a></li>
+                            <li class="nav-item"><a class="nav-link" href="#">Projects</a></li>
+                        </ul>
+                        <!-- End Nav Link -->
+                    </div>
+
+                    <div class="col-6 col-sm-4 col-lg-2">
+                        <h5>Resources</h5>
+
+                        <!-- Nav Link -->
+                        <ul class="nav nav-sm nav-x-0 flex-column">
+                            <li class="nav-item"><a class="nav-link" href="../pages/faq.html">Help</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../pages/terms.html">Terms</a></li>
+                            <li class="nav-item"><a class="nav-link" href="../pages/privacy.html">Privacy</a></li>
+                        </ul>
+                        <!-- End Nav Link -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Lists -->
+    </footer>
+    <!-- ========== END FOOTER ========== -->
+    <!-- Go to Top -->
+    <a class="js-go-to go-to position-fixed" href="javascript:;" style="visibility: hidden;"
+       data-hs-go-to-options='{
+       "offsetTop": 700,
+       "position": {
+         "init": {
+           "right": 15
+         },
+         "show": {
+           "bottom": 15
+         },
+         "hide": {
+           "bottom": -15
+         }
+       }
+     }'>
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <!-- End Go to Top -->
+    <!-- JS Global Compulsory -->
+    <script src="~/vendor/jquery/dist/jquery.min.js"></script>
+    <script src="~/vendor/jquery-migrate/dist/jquery-migrate.min.js"></script>
+    <script src="~/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- JS Implementing Plugins -->
+    <script src="~/vendor/hs-header/dist/hs-header.min.js"></script>
+    <script src="~/vendor/hs-go-to/dist/hs-go-to.min.js"></script>
+    <script src="~/vendor/hs-mega-menu/dist/hs-mega-menu.min.js"></script>
+
+    <!-- JS Front -->
+    <script src="~/js/hs.core.js"></script>
+    @RenderSection("Scripts", required: false)
+
+    <!-- JS Plugins Init. -->
+    <script>
+        $(document).on('ready', function () {
+            // initialization of header
+            var header = new HSHeader($('#header')).init();
+
+            // initialization of mega menu
+            var megaMenu = new HSMegaMenu($('.js-mega-menu')).init();
+
+            // initialization of go to
+            $('.js-go-to').each(function () {
+                var goTo = new HSGoTo($(this)).init();
+            });
+        });
+    </script>
+
+    <!-- IE Support -->
+    <script>
+        if (/MSIE \d|Trident.*rv:/.test(navigator.userAgent)) document.write('<script src="~/vendor/polifills.js"><\/script>');
+    </script>
+
+    <script type="text/javascript">
+        $(function () {
+            
+        });
+
+        
+    </script>
+</body>
+</html>

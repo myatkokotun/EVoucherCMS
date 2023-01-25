@@ -1,0 +1,77 @@
+﻿@model EVMSWeb.ViewModels.PagingModel<EVMSWeb.Models.TbEvoucher>
+@using X.PagedList.Mvc.Core;
+@using X.PagedList.Web.Common;
+@if (Model.TotalCount != 0)
+{
+    <div class="row" style="min-width:920px">
+        @foreach (var ev in Model.Results)
+        {
+            <div class="col-sm-6 col-md-4 mb-5">
+                <!-- Card -->
+                <div class="card card-frame h-100" href="app-description.html">
+                    <div class="card-header bg-warning text-center rounded-top py-4">
+                        <div class="avatar avatar-lg d-block bg-white rounded p-2 mx-auto">
+                            <img class="avatar-img" src="~/image/img4.jpg" alt="Image Description">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-1">
+                            <span class="d-block text-dark font-weight-bold">@ev.Title</span>
+                            <img class="ml-2" src="~/svg/illustrations/top-vendor.svg" alt="Image Description" title="Top Vendor" width="16">
+                        </div>
+                        <span class="d-block text-body font-size-1">@ev.Description</span>
+                        <span class="d-block text-body font-size-1">Expire date : @ev.ExpiryDate</span>
+                        <span class="d-block text-body font-size-1">Amount : @ev.Amount</span>
+                        @if (ev.BuyType == "only me usage")
+                        {
+                            <span class="d-block text-body font-size-1">Name : @ev.MyselfName</span>
+                            <span class="d-block text-body font-size-1">Phone : @ev.MyselfPhone</span>
+                            <span class="d-block text-body font-size-1">Max Limit : @ev.MyselfMaxLimit</span>
+                        }
+                        else
+                        {
+                            <span class="d-block text-body font-size-1">Friend's Name : @ev.OtherName</span>
+                            <span class="d-block text-body font-size-1">Friend's Phone : @ev.OtherPhone</span>
+                            <span class="d-block text-body font-size-1">Gift Limit : @ev.OtherGiftLimit</span>
+                            <span class="d-block text-body font-size-1">Buy Limit : @ev.OtherBuyLimit</span>
+                        }
+
+                    </div>
+                    <div class="card-footer">
+                        <div class="row align-items-center">
+                            <button onclick="EditEVoucher(this)" data-id="@ev.Id" class="btn btn-xs font-weight-bold btn-primary mr-2" style="width:90px;">Edit</button>
+                            <button onclick="DeleteEVoucher(this)" data-id="@ev.Id" class="btn btn-xs font-weight-bold btn-primary mr-2" style="width:90px;">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <!-- End Card -->
+            </div>
+        }
+        <div class="clearfix"></div>
+    </div>
+
+    <div class="row">
+        <div class="mt-5">
+            <nav>
+                <div class="pagedList pull-right">
+                    @Html.PagedListPager(Model.Results, page => Url.Action("Index", "Home",
+                new { page }), new PagedListRenderOptions
+                {
+                DisplayLinkToFirstPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                DisplayLinkToLastPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                DisplayLinkToPreviousPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                DisplayLinkToNextPage = X.PagedList.Web.Common.PagedListDisplayMode.Always,
+                MaximumPageNumbersToDisplay = 5,
+                DisplayLinkToIndividualPages = true,
+                UlElementClasses = new[] { "pagination justify-content-center" },
+                LiElementClasses = new[] { "page-item" },
+                PageClasses = new string[] { "page-link btn btn-icon btn-circle btn-sm border-0 btn-hover-success mr-2 my-1" },
+                LinkToPreviousPageFormat = "<i class='ki ki-bold-arrow-back icon-xs'></i>",
+                LinkToNextPageFormat = "<i class='ki ki-bold-arrow-next icon-xs'></i>"
+                })
+                </div>
+                <br />
+            </nav>
+        </div>
+    </div>
+}

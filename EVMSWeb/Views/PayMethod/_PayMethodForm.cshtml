@@ -1,0 +1,26 @@
+﻿@model EVMSWeb.Models.TbPaymentMethod
+@using (Html.BeginForm("UpSertPayMethod", "PayMethod", FormMethod.Post, new { @id = "PayMethodForm" }))
+{
+    @Html.AntiForgeryToken()
+    <form class="js-validate row justify-content-lg-center" class="form" novalidate="novalidate" id="PayMethodForm" method="post" asp-action="UpSertPayMethod">
+        <div class="col-lg-8">
+            <!-- Input -->
+            <div class="js-form-message mb-4 mb-md-6">
+                <label class="input-label">Payment Method Name</label>
+                <input type="text" class="form-control" name="MethodName" placeholder="VISA" required="" data-msg="Please enter Payment Method.">
+            </div>
+            <!-- End Input -->
+            <!-- Input -->
+            <div class="js-form-message mb-4 mb-md-6">
+                <label class="input-label">Discount <span class="text-muted font-weight-normal ml-1">(optional)</span></label>
+                <input type="number" class="form-control" name="Discount" placeholder="10">
+            </div>
+            @Html.HiddenFor(m => m.Id)
+            <div class="text-center">
+                <div class="mb-2">
+                    <button type="submit" id="btnsave" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+}

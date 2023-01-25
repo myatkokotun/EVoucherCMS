@@ -1,0 +1,93 @@
+﻿@model EVMSWeb.Models.TbEvoucher
+@using (Html.BeginForm("UpSertEVoucher", "Home", FormMethod.Post, new { @id = "EVoucherForm" }))
+{
+    @Html.AntiForgeryToken()
+    <form class="js-validate row justify-content-lg-center" class="form" novalidate="novalidate" id="EVoucherForm" method="post" asp-action="UpSertEVoucher">
+        <div class="col-lg-8">
+            <!-- Input -->
+            <div class="js-form-message mb-4 mb-md-6">
+                <label class="input-label">Title</label>
+                <input type="text" class="form-control" name="Title" placeholder="Computer" required="" data-msg="Please enter Title.">
+            </div>
+            <!-- End Input -->
+            <!-- Input -->
+            <div class="js-form-message mb-4 mb-md-6">
+                <label class="input-label">Description <span class="text-muted font-weight-normal ml-1">(optional)</span></label>
+                <input type="text" class="form-control" name="Description" placeholder="Description">
+            </div>
+            <!-- End Input -->
+            <!-- Input -->
+            <div class="mb-4 mb-md-6">
+                <label class="input-label">ExpiryDate <span class="text-muted font-weight-normal ml-1">(optional)</span></label>
+                <input type="date" class="form-control" placeholder="15.6.2025">
+            </div>
+            <!-- End Input -->
+            <!-- Input -->
+            <div class="mb-4 mb-md-6">
+                <label class="input-label">Amount</label>
+                <input type="number" class="form-control" placeholder="200000" required="" data-msg="Please enter Amount.">
+            </div>
+            <!-- End Input -->
+            <!-- Input -->
+            <div class="mb-4 mb-md-6">
+                <label class="input-label">Quantity</label>
+                <input type="number" class="form-control" placeholder="25" required="" data-msg="Please enter Quantity.">
+            </div>
+            <!-- End Input -->
+            <!-- Input -->
+            <div class="js-form-message mb-4 mb-md-6">
+                <label class="input-label">Payment Method</label>
+                <select id="PaymentMethod" name="PaymentMethod" class="form-control PayMethodDD"></select>
+                @Html.HiddenFor(m => m.PaymentMethod, new { id = "hpaymethod" })
+            </div>
+            <!-- End Input -->
+            <div class="js-form-message mb-4 mb-md-6">
+                <label class="input-label">Buy for you or other</label>
+                <select class="form-control custom-select buytype" data-msg="Buy for me">
+                    <option value="only me usage" selected="">Buy for me</option>
+                    <option value="gift to others">Gift to other</option>
+                </select>
+            </div>
+
+            <div id="myself">
+                <div class="js-form-message mb-4 mb-md-6">
+                    <label class="input-label">Your Name </label>
+                    <input type="text" class="form-control" name="MyselfName" placeholder="Ko Hla Shwe" required="" data-msg="Please enter Please select your name">
+                </div>
+                <div class="js-form-message mb-4 mb-md-6">
+                    <label class="input-label">Your Phone No.</label>
+                    <input type="text" class="form-control" name="MyselfPhone" placeholder="09934472344" required="" data-msg="Please enter Please enter Please select your phone no.">
+                </div>
+                <div class="js-form-message mb-4 mb-md-6">
+                    <label class="input-label">Max. limit</label>
+                    <input type="number" class="form-control" name="MyselfMaxLimit" placeholder="100">
+                </div>
+            </div>
+            <div id="forother" hidden>
+                <div class="js-form-message mb-4 mb-md-6">
+                    <label class="input-label">Your Friend's' Name </label>
+                    <input type="text" class="form-control" name="OtherName" placeholder="Ko Hla Shwe" required="" data-msg="Please enter Please select your name">
+                </div>
+                <div class="js-form-message mb-4 mb-md-6">
+                    <label class="input-label">Your Friend Phone No.</label>
+                    <input type="text" class="form-control" name="OtherPhone" placeholder="09934472344" required="" data-msg="Please enter Please enter Please select your phone no.">
+                </div>
+                <div class="js-form-message mb-4 mb-md-6">
+                    <label class="input-label">Max. Gift limit</label>
+                    <input type="number" class="form-control" name="OtherGiftLimit" placeholder="100">
+                </div>
+                <div class="js-form-message mb-4 mb-md-6">
+                    <label class="input-label">Max. Buy limit</label>
+                    <input type="number" class="form-control" name="OtherBuyLimit" placeholder="100">
+                </div>
+            </div>
+            @Html.HiddenFor(m => m.Id)
+            @Html.HiddenFor(m => m.Accesstime)
+            <div class="text-center">
+                <div class="mb-2">
+                    <button type="submit" id="btnsave" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
+}
